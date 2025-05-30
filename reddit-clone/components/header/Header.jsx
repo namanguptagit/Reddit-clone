@@ -1,7 +1,7 @@
 "use client";
 
 import { SignedIn,SignedOut,SignInButton,UserButton } from "@clerk/nextjs";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import reddishLogoOnly from "@/images/Reddish Logo Only.png";
 import reddishLogo from "@/images/Reddish Full.png";
 import Image from "next/image";

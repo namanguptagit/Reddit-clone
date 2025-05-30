@@ -22,7 +22,8 @@ import {
 } from "@/components/ui/sidebar"
 import Image from "next/image";
 import reddishLogo from "@/images/Reddish Full.png";
-// This is sample data.
+import { getSubreddits } from "@/sanity/lib/subreddit/getSubreddits";
+import CreateCommunityButton from "@/components/header/CreateCommunityButton";
 type SidebarData = {
   navMain: {
     title: string;
@@ -30,28 +31,23 @@ type SidebarData = {
     items: { title: string; url: string; isActive: boolean }[];
   }[];
 };
-const data: SidebarData = {
-  navMain: [
-    {
-      title: "Communities",
-      url: "#",
-      items: [
-        {
-          title: "Installation",
-          url: "#",
-          isActive: false,
-        },
-        {
-          title: "Project Structure",
-          url: "#",
-          isActive: false,
-        },
-      ],
-    },
-  ],
-}
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+
+  const subreddits = await getSubreddits();
+  const data: SidebarData = {
+    navMain: [
+      {
+        title: "Communities",
+        url: "#",
+        items: subreddits.map((subreddit) => ({
+          title: subreddit.title || "",
+          url: `/community/${subreddit.slug}`,
+          isActive: false,
+        })) || [],
+      },
+    ],
+  }
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -70,7 +66,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarGroup>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild></SidebarMenuButton>
+              <SidebarMenuButton asChild>
+                <CreateCommunityButton />
+              </SidebarMenuButton>
               <SidebarMenuButton asChild className="p-5">
                 <Link href="/">
                   <HomeIcon className="w-4 h-4 mr-2" />Home
@@ -114,7 +112,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                               asChild
                               isActive={item.isActive}
                             >
-                              <a href={item.url}>{item.title}</a>
+                              <Link href={item.url}>{item.title}</Link>
                             </SidebarMenuSubButton>
                           </SidebarMenuSubItem>
                         ))}
