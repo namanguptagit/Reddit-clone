@@ -67,6 +67,13 @@ export const postType = defineType({
       initialValue: false,
     }),
     defineField({
+      name: "isCensored",
+      title: "Is Censored",
+      type: "boolean",
+      description: "Indicates if this post has been censored by moderation",
+      initialValue: false,
+    }),
+    defineField({
       name: "publishedAt",
       title: "Published At",
       type: "datetime",

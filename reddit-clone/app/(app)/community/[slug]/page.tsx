@@ -13,7 +13,7 @@ async function CommunityPage({
   const { slug } = await params;
 
   const community = await getSubredditBySlug(slug);
-  if (!community) return null;
+  if (!community) return null; 
 
   const user = await currentUser();
   const posts = await getPostsForSubreddit(community._id);

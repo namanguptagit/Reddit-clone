@@ -123,6 +123,7 @@ export type Post = {
     _type: "image";
   };
   isReported?: boolean;
+  isCensored?: boolean;
   publishedAt?: string;
   isDeleted?: boolean;
 };
@@ -652,6 +653,7 @@ export type GetPostsForSubredditQueryResult = Array<{
     _type: "image";
   };
   isReported?: boolean;
+  isCensored?: boolean;
   publishedAt?: string;
   isDeleted?: boolean;
   slug: null;

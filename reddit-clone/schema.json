@@ -676,6 +676,13 @@
         },
         "optional": true
       },
+      "isCensored": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
+      },
       "publishedAt": {
         "type": "objectAttribute",
         "value": {
